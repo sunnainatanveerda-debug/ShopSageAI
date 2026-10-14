@@ -19,6 +19,11 @@ Small businesses may collect sales data without having an easy way to interpret 
 - **Business recommendations:** Receive rule-based suggestions based on sales performance.
 - **Question-answering assistant:** Ask supported questions about the selected sales data.
 - **Downloadable reports:** Export filtered sales data, business summaries, and KPI reports.
+## Dashboard Preview
+shopsage-dashboard.png
+shopsage-dashboard.png1.png
+shopsage-dashboard.png2.png
+
 
 ## Technology Stack
 
