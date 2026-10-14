@@ -20,7 +20,7 @@ Small businesses may collect sales data without having an easy way to interpret 
 - **Question-answering assistant:** Ask supported questions about the selected sales data.
 - **Downloadable reports:** Export filtered sales data, business summaries, and KPI reports.
 ## Dashboard Preview
-
+![ShopSage AI Dashboard](https://raw.githubusercontent.com/sunnainatanveerda-debug/ShopSageAI/main/shopsage-dashboard.png)
 
 ## Technology Stack
 
