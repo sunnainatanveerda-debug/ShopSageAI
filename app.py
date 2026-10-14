@@ -691,3 +691,104 @@ st.download_button(
 )
 
 
+# ShopSage AI Business Question-Answering Assistant
+st.divider()
+st.header("🤖 Ask ShopSage AI")
+st.write(
+    "Ask questions about your sales data in simple English. "
+    "Answers use your currently selected filters."
+)
+
+question = st.text_input(
+    "What would you like to know?",
+    placeholder="e.g. Which product generated the most revenue?"
+)
+
+if st.button("Get Answer", type="primary"):
+    if not question.strip():
+        st.warning("Please enter a question first.")
+    else:
+        q = question.lower().strip()
+
+        if any(word in q for word in ["revenue", "sales", "income"]):
+            if any(word in q for word in ["category", "categories"]):
+                group = filtered_df.groupby("category")["revenue"].sum()
+                if any(word in q for word in ["lowest", "worst", "least"]):
+                    name = group.idxmin()
+                    st.info(
+                        f"{name} has the lowest revenue: "
+                        f"{group.min():,.2f}."
+                    )
+                else:
+                    name = group.idxmax()
+                    st.success(
+                        f"{name} has the highest category revenue: "
+                        f"{group.max():,.2f}."
+                    )
+
+            elif any(word in q for word in ["product", "item"]):
+                group = filtered_df.groupby("product")["revenue"].sum()
+                if any(word in q for word in ["lowest", "worst", "least"]):
+                    name = group.idxmin()
+                    st.info(
+                        f"{name} has the lowest product revenue: "
+                        f"{group.min():,.2f}."
+                    )
+                else:
+                    name = group.idxmax()
+                    st.success(
+                        f"{name} has the highest product revenue: "
+                        f"{group.max():,.2f}."
+                    )
+
+            elif any(word in q for word in ["day", "date", "daily"]):
+                group = filtered_df.groupby(
+                    filtered_df["order_date"].dt.date
+                )["revenue"].sum()
+                best_day = group.idxmax()
+                st.success(
+                    f"The highest-sales day was {best_day}, "
+                    f"with revenue of {group.max():,.2f}."
+                )
+
+            else:
+                st.success(
+                    f"Total revenue for your selected data is "
+                    f"{total_revenue:,.2f}."
+                )
+
+        elif any(word in q for word in ["unit", "quantity", "items sold"]):
+            st.success(f"Total units sold: {total_units:,.0f}.")
+
+        elif any(word in q for word in ["order", "transaction"]):
+            st.success(f"Unique orders: {total_orders:,}.")
+
+        elif any(word in q for word in ["average", "aov", "per order"]):
+            st.success(
+                f"Average revenue per unique order: "
+                f"{average_order_value:,.2f}."
+            )
+
+        elif any(word in q for word in ["recommend", "improve", "advice"]):
+            st.info(
+                f"Start by reviewing {top_product}, your highest-revenue "
+                f"product, and {top_category}, your highest-revenue "
+                "category. Check stock, demand, and profit margins "
+                "before making business changes."
+            )
+
+        else:
+            st.warning(
+                "I cannot answer that question yet. Try asking about "
+                "revenue, products, categories, sales days, units sold, "
+                "orders, average order value, or business recommendations."
+            )
+
+st.caption(
+    "Answers are calculated from your selected sales data. "
+    "This initial assistant uses predefined question patterns, "
+    "not a generative AI model."
+)
+
+
+
