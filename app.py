@@ -592,32 +592,34 @@ with col2:
 
 st.markdown("### Recommended Actions")
 
+
 # Recommendation 1: Best-performing product
 st.info(
     f"**Product opportunity:** {top_product} generates the "
-    f"highest revenue ({top_product_revenue:,.0f}) in the "
-    "currently selected data. Review its stock availability "
-    "and sales consistency before increasing inventory."
+    f"highest revenue ({top_product_revenue:,.2f}) in the "
+    "currently selected data. Check its stock levels and "
+    "sales consistency before deciding whether to increase inventory."
 )
 
 # Recommendation 2: Category performance
 st.info(
     f"**Category opportunity:** {top_category} leads with "
-    f"revenue of {top_category_revenue:,.0f}. Consider "
-    "reviewing customer demand and the performance of other "
-    "products in this category."
+    f"revenue of {top_category_revenue:,.2f}. Review the "
+    "products in this category to identify strong performers "
+    "and products that may need attention."
 )
 
-# Recommendation 3: Revenue per unique order
+# Recommendation 3: Average order value
 average_order_value = (
     total_revenue / total_orders if total_orders > 0 else 0
 )
 
 st.info(
     f"**Order value:** Average revenue per unique order is "
-    f"{average_order_value:,.2f}. Compare this metric across "
-    "different periods to understand changes in purchasing."
+    f"{average_order_value:,.2f}. Compare this value across "
+    "different periods to identify changes in purchasing patterns."
 )
+
 
 st.caption(
     "These recommendations are generated from sales patterns. "
