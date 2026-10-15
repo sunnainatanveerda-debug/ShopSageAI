@@ -574,11 +574,20 @@ category_revenue = (
     .sort_values(ascending=False)
 )
 
-top_product = product_revenue.index[0]
-top_product_revenue = product_revenue.iloc[0]
 
-top_category = category_revenue.index[0]
-top_category_revenue = category_revenue.iloc[0]
+if not product_revenue.empty and not category_revenue.empty:
+    top_product = product_revenue.index[0]
+    top_product_revenue = product_revenue.iloc[0]
+
+    top_category = category_revenue.index[0]
+    top_category_revenue = category_revenue.iloc[0]
+else:
+    st.info(
+        "No sales data is available for the current filters. "
+        "Please adjust your filters to view business recommendations."
+    )
+    st.stop()
+
 
 col1, col2 = st.columns(2)
 
